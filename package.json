@@ -1,0 +1,15 @@
+{
+    "name": "deskera",
+    "version": "0.0.1",
+    "description": "Realtime chat system for Deskera",
+    "keywords": [
+        "node",
+        "chat"
+    ],
+    "author": "Anand Deep Singh",
+    "private": true,
+    "dependencies": {
+        "express": "latest",
+        "socket.io": "latest"
+    }
+}

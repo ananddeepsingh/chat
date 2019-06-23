@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <link href=data:;base64,iVBORwOKGO=rel="icon">
+    <link href=asset/main.css rel=stylesheet>
+    <script defer src=/socket.io/socket.io.js> </script> 
+    <script defer src=asset/main.js type=module></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+
+<body class="login-bg">
+
+    <form id="nameForm">
+        <input id=username name=username placeholder="Enter a username." required>
+        <button class="btn btn-info btn-md">Join</button>
+    </form>
+
+    <div class="hide" id="mainContainer">
+        <header class="header">
+            <a href="index.html" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                Deskera
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>Jane Doe </span><i class="caret"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                    <!-- <img src="img/avatar3.png" class="img-circle" alt="User Image" /> -->
+                                    <div id='userDetails' class="row">
+                                        <div class="country col-xs-12">
+                                            <label class="col-xs-6" for="country">Country</label>
+                                            <select id="country" class="col-xs-6">
+                                                <option value="0">Please Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="selectBoxResult hide">
+                                            <div id="callingCode" class="col-xs-12">
+                                                <label class="col-xs-6" for="callingCode">Calling Code -</label>
+                                                <span class="col-xs-6 text-left"></span>
+                                            </div>
+                                            <div id="currency" class="col-xs-12">
+                                                <label class="col-xs-6" for="currency">Currency -</label>
+                                                <span class="col-xs-6 text-left"></span>
+                                            </div>
+                                            <div id="timeZone" class="col-xs-12">
+                                                <label class="col-xs-6" for="time">Time zone -</label>
+                                                <span class="col-xs-6 text-left"></span>
+                                            </div>
+                                            <div id="countryFlag" class="col-xs-12">
+
+                                                <label class="col-xs-6" for="time">Country Flag -</label>
+                                                <img src="" class="text-left col-xs-6" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <aside class="left-side sidebar-offcanvas">
+                <section class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o"></i> <span>Company Profile</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o"></i> <span>Users</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o"></i> <span>Rules</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o"></i> <span>Team Chat</span>
+                                <i class="fa pull-right fa-angle-down"></i>
+                            </a>
+
+                            <!-- online users list -->
+                            <ul class="hidden treeview-menu" id=peopleList></ul>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+            <aside class="right-side">
+                <section class="content-header">
+                    <h1 id="section-heading">
+                        Team Chat
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Team Chat</li>
+                    </ol>
+                    <div id="tabbing" class="hide">
+                        <ul class="nav nav-tabs">
+                            <li class="hide"><a data-toggle="tab" href="#home"><span></span><small class="close-tab">X</small></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+
+                        </div>
+                    </div>
+        </div>
+        </section>
+        </aside>
+    </div>
+    </div>
+
+
+
+    <div class="chat hide tab-pane fade in active" data-username="" id=chat>
+        <div id="messages">    <ul class=messages></ul> </div>
+        <form class="chat  no-border">
+            <!-- <div class="">
+                <input type="text" name=message class="form-control  col-xs-8" placeholder="Type your message here...">
+                <button class="btn btn-warning btn-sm  col-xs-4">Send</button>
+            </div> -->
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="btn-input" type="text" name="message" class="form-control input-sm"
+                        placeholder="Type your message here...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-sm" id="btn-chat">
+                            Send</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        var height = document.documentElement.clientHeight;
+        document.querySelector('.left-side').style.height = height + 21 + 'px';
+        document.querySelector('.right-side').style.height = height + 'px';
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
