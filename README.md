@@ -4,7 +4,8 @@ chat app
 ## how to start app
 
 	1. npm install
-	2. open http://localhost:5500
+	2. To start app use -> node index.js 
+	3. open http://localhost:5500
 	
 	
 ## Features
